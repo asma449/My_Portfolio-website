@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #675485;
+            --primary-dark: #35405c;
+            --secondary-color: #f8fafc;
+            --text-color: #334155;
+            --heading-color: #1e293b;
+            --light-gray: #e2e8f0;
+            --white: #ffffff;
+            --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #c4e7e7;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #2c3b53);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        header h1 {
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(48, 10, 163, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--heading-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        /* Sections */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--heading-color);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* About Me */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 1rem;
+            font-size: 1.4rem;
+        }
+        
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .project-card .card-header {
+            background-color: var(--primary-color);
+            padding: 1.5rem;
+            color: var(--white);
+        }
+        
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .project-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        .project-card p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-card .card-footer {
+            padding: 1rem 1.5rem;
+            background-color: #c6d1ea;
+            border-top: 1px solid var(--light-gray);
+            text-align: right;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Skills */
+        .skills-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            max-width: 800px;
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .skills-table th, .skills-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .skills-table th {
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .skills-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .skills-table tr:hover {
+            background-color: #b1c9e0;
+        }
+        
+        .skill-level {
+            display: inline-block;
+            height: 8px;
+            width: 100%;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+        
+        .advanced .skill-fill { width: 90%; }
+        .intermediate .skill-fill { width: 65%; }
+        .beginner .skill-fill { width: 40%; }
+        
+        /* Video */
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+        
+        video {
+            width: 100%;
+            display: block;
+        }
+        
+        .video-caption {
+            padding: 1rem;
+            text-align: center;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        /* Contact */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--primary-color);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--heading-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1e293b;
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>My Portfolio</h1>
+            <p>Web Developer & Designer</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about-me">About Me</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#demo">Demo Video</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section id="about-me">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-content">
+                <p>Hello! My name is Asma, and I am a passionate web developer with experience in creating responsive and user-friendly websites. I enjoy solving complex problems and building creative digital solutions that make a difference.</p>
+                <p>I'm committed to continuous learning and staying up-to-date with the latest web technologies and best practices. When I'm not coding, you can find me hiking, reading, or experimenting with new recipes.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="card-header">
+                        <h3>Portfolio Website</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>A personal website to showcase my work, built using HTML, CSS, and JavaScript. This responsive design adapts seamlessly to all device sizes and features smooth animations and intuitive navigation.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="card-header">
+                        <h3>Blog Platform</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>A fully-featured blog platform where users can post and read articles. Includes user authentication, comment functionality, and a robust content management system. Built with React and Node.js.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="card-header">
+                        <h3>To-Do List App</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>An intuitive app to manage daily tasks efficiently. Features include task categorization, priority setting, deadlines, and progress tracking. Developed with vanilla JavaScript and local storage for persistence.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Skills</h2>
+            </div>
+            <table class="skills-table">
+                <thead>
+                    <tr>
+                        <th>Skill</th>
+                        <th>Proficiency</th>
+                        <th>Experience (Years)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>HTML</td>
+                        <td>
+                            <div class="skill-level advanced">
+                                <div class="skill-fill"></div>
+                            </div>
+                        </td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>CSS</td>
+                        <td>
+                            <div class="skill-level intermediate">
+                                <div class="skill-fill"></div>
+                            </div>
+                        </td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>JavaScript</td>
+                        <td>
+                            <div class="skill-level intermediate">
+                                <div class="skill-fill"></div>
+                            </div>
+                        </td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>React</td>
+                        <td>
+                            <div class="skill-level beginner">
+                                <div class="skill-fill"></div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Node.js</td>
+                        <td>
+                            <div class="skill-level beginner">
+                                <div class="skill-fill"></div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <section id="demo">
+        <div class="container">
+            <div class="section-title">
+                <h2>project video</h2>
+            </div>
+            <div class="video-container">
+                <video controls>
+                    <source src="my.mp4" type="video/mp4">
+                    <source src="portfolio-demo.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-caption">
+                    <p>A brief demonstration of my recent web development projects</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Me</h2>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-dribbble"></i></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
